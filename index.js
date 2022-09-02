@@ -3,6 +3,7 @@ const nextEl = document.getElementById('next');
 const sliderEl = document.getElementById('slider');
 let interval = undefined;
 let timeout = undefined;
+let selectedImgIndex = 0;
 
 previousEl.addEventListener('click', onPreviousClick)
 nextEl.addEventListener('click', onNextClick);
@@ -15,12 +16,16 @@ function onPreviousClick(){
     const sliderWidth = sliderEl.offsetWidth;
     sliderEl.scrollLeft -= sliderWidth;
     handleUserClick();
+    selectedImgIndex--;
+    handleActiveDot();
 }
 
 function onNextClick(){
     const sliderWidth = sliderEl.offsetWidth;
     sliderEl.scrollLeft += sliderWidth;
     handleUserClick();
+    selectedImgIndex++;
+    handleActiveDot();
 }
 
 function handleUserClick() {
@@ -31,6 +36,18 @@ function handleUserClick() {
     }, 20000);
 
 
+}
+
+function handleActiveDot(){
+    const list = Array.from(document.getElementsByClassName('dot'));
+
+    if (selectedImgIndex < 0) selectedImgIndex = 0;
+    if(selectedImgIndex >= list.length) selectedImgIndex = list.length - 1;
+
+
+    
+    list.forEach(el => el.classList.remove('active'));
+    list[selectedImgIndex].classList.add('active');
 }
 
 function autoScroll() {
@@ -45,12 +62,16 @@ function autoScroll() {
         // se for a ultima, volta pro 0
         if(numberOfImages === selectedImage ){
             sliderEl.scrollLeft = 0
+            selectedImgIndex = 0;
+            handleActiveDot();
             return;
         }
 
         //senao
         
         sliderEl.scrollLeft += sliderWidth;
+        selectedImgIndex++;
+        handleActiveDot();
     }
     , 3000)
 }

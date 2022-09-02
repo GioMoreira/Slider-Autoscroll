@@ -1,27 +1,32 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Alegreya&display=swap');
 
+:root{
+    --dark-grey: rgb(83, 79, 70);
+    --light-grey: rgb(184, 183, 182);
+}
+
 body{
     margin: 0;
     background: rgba(245, 242, 237, 0.2);
 }
 
+
+
 .container{
     margin: 30px auto;
-    width: 80%;
-    height: 80vh;
-    overflow: hidden;
+    width: 90%;
+    height: 70vh;
     position: relative;
 
 }
 
-.container h2{
+h2{
     text-align: center;
-    color: white;
-    position: absolute;
     left: 43%;
     font-size: 40px;
     font-family: 'Alegreya', serif;
+    color: var(--dark-grey);
 
 }
 
@@ -62,4 +67,26 @@ body{
 #next{
     left: unset;
     right: 30px;
+}
+
+.container span {
+    color: var(--dark-grey)
+}
+
+.dots-container{
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+.dots-container .dot{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--light-grey);
+    margin: 0 10px;
+}
+
+.dots-container .dot.active{
+    background: var(--dark-grey);
 }
